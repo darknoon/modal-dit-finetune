@@ -1,0 +1,13 @@
+accelerate>=0.31.0
+torchvision
+transformers>=4.41.2
+diffusers[torch]>=0.29.0
+ftfy
+sentencepiece
+protobuf
+tensorboard
+Jinja2
+peft== 0.11.1
+wandb
+bitsandbytes
+datasets
