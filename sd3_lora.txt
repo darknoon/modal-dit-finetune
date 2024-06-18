@@ -1,0 +1,210 @@
+SD3Transformer2DModel(
+  (pos_embed): PatchEmbed(
+    (proj): Conv2d(16, 1536, kernel_size=(2, 2), stride=(2, 2))
+  )
+  (time_text_embed): CombinedTimestepTextProjEmbeddings(
+    (time_proj): Timesteps()
+    (timestep_embedder): TimestepEmbedding(
+      (linear_1): Linear(in_features=256, out_features=1536, bias=True)
+      (act): SiLU()
+      (linear_2): Linear(in_features=1536, out_features=1536, bias=True)
+    )
+    (text_embedder): PixArtAlphaTextProjection(
+      (linear_1): Linear(in_features=2048, out_features=1536, bias=True)
+      (act_1): SiLU()
+      (linear_2): Linear(in_features=1536, out_features=1536, bias=True)
+    )
+  )
+  (context_embedder): Linear(in_features=4096, out_features=1536, bias=True)
+  (transformer_blocks): ModuleList(
+    (0-22): 23 x JointTransformerBlock(
+      (norm1): AdaLayerNormZero(
+        (silu): SiLU()
+        (linear): Linear(in_features=1536, out_features=9216, bias=True)
+        (norm): LayerNorm((1536,), eps=1e-06, elementwise_affine=False)
+      )
+      (norm1_context): AdaLayerNormZero(
+        (silu): SiLU()
+        (linear): Linear(in_features=1536, out_features=9216, bias=True)
+        (norm): LayerNorm((1536,), eps=1e-06, elementwise_affine=False)
+      )
+      (attn): Attention(
+        (to_q): lora.Linear(
+          (base_layer): Linear(in_features=1536, out_features=1536, bias=True)
+          (lora_dropout): ModuleDict(
+            (default_0): Identity()
+          )
+          (lora_A): ModuleDict(
+            (default_0): Linear(in_features=1536, out_features=4, bias=False)
+          )
+          (lora_B): ModuleDict(
+            (default_0): Linear(in_features=4, out_features=1536, bias=False)
+          )
+          (lora_embedding_A): ParameterDict()
+          (lora_embedding_B): ParameterDict()
+        )
+        (to_k): lora.Linear(
+          (base_layer): Linear(in_features=1536, out_features=1536, bias=True)
+          (lora_dropout): ModuleDict(
+            (default_0): Identity()
+          )
+          (lora_A): ModuleDict(
+            (default_0): Linear(in_features=1536, out_features=4, bias=False)
+          )
+          (lora_B): ModuleDict(
+            (default_0): Linear(in_features=4, out_features=1536, bias=False)
+          )
+          (lora_embedding_A): ParameterDict()
+          (lora_embedding_B): ParameterDict()
+        )
+        (to_v): lora.Linear(
+          (base_layer): Linear(in_features=1536, out_features=1536, bias=True)
+          (lora_dropout): ModuleDict(
+            (default_0): Identity()
+          )
+          (lora_A): ModuleDict(
+            (default_0): Linear(in_features=1536, out_features=4, bias=False)
+          )
+          (lora_B): ModuleDict(
+            (default_0): Linear(in_features=4, out_features=1536, bias=False)
+          )
+          (lora_embedding_A): ParameterDict()
+          (lora_embedding_B): ParameterDict()
+        )
+        (add_k_proj): Linear(in_features=1536, out_features=1536, bias=True)
+        (add_v_proj): Linear(in_features=1536, out_features=1536, bias=True)
+        (add_q_proj): Linear(in_features=1536, out_features=1536, bias=True)
+        (to_out): ModuleList(
+          (0): lora.Linear(
+            (base_layer): Linear(in_features=1536, out_features=1536, bias=True)
+            (lora_dropout): ModuleDict(
+              (default_0): Identity()
+            )
+            (lora_A): ModuleDict(
+              (default_0): Linear(in_features=1536, out_features=4, bias=False)
+            )
+            (lora_B): ModuleDict(
+              (default_0): Linear(in_features=4, out_features=1536, bias=False)
+            )
+            (lora_embedding_A): ParameterDict()
+            (lora_embedding_B): ParameterDict()
+          )
+          (1): Dropout(p=0.0, inplace=False)
+        )
+        (to_add_out): Linear(in_features=1536, out_features=1536, bias=True)
+      )
+      (norm2): LayerNorm((1536,), eps=1e-06, elementwise_affine=False)
+      (ff): FeedForward(
+        (net): ModuleList(
+          (0): GELU(
+            (proj): Linear(in_features=1536, out_features=6144, bias=True)
+          )
+          (1): Dropout(p=0.0, inplace=False)
+          (2): Linear(in_features=6144, out_features=1536, bias=True)
+        )
+      )
+      (norm2_context): LayerNorm((1536,), eps=1e-06, elementwise_affine=False)
+      (ff_context): FeedForward(
+        (net): ModuleList(
+          (0): GELU(
+            (proj): Linear(in_features=1536, out_features=6144, bias=True)
+          )
+          (1): Dropout(p=0.0, inplace=False)
+          (2): Linear(in_features=6144, out_features=1536, bias=True)
+        )
+      )
+    )
+    (23): JointTransformerBlock(
+      (norm1): AdaLayerNormZero(
+        (silu): SiLU()
+        (linear): Linear(in_features=1536, out_features=9216, bias=True)
+        (norm): LayerNorm((1536,), eps=1e-06, elementwise_affine=False)
+      )
+      (norm1_context): AdaLayerNormContinuous(
+        (silu): SiLU()
+        (linear): Linear(in_features=1536, out_features=3072, bias=True)
+        (norm): LayerNorm((1536,), eps=1e-06, elementwise_affine=False)
+      )
+      (attn): Attention(
+        (to_q): lora.Linear(
+          (base_layer): Linear(in_features=1536, out_features=1536, bias=True)
+          (lora_dropout): ModuleDict(
+            (default_0): Identity()
+          )
+          (lora_A): ModuleDict(
+            (default_0): Linear(in_features=1536, out_features=4, bias=False)
+          )
+          (lora_B): ModuleDict(
+            (default_0): Linear(in_features=4, out_features=1536, bias=False)
+          )
+          (lora_embedding_A): ParameterDict()
+          (lora_embedding_B): ParameterDict()
+        )
+        (to_k): lora.Linear(
+          (base_layer): Linear(in_features=1536, out_features=1536, bias=True)
+          (lora_dropout): ModuleDict(
+            (default_0): Identity()
+          )
+          (lora_A): ModuleDict(
+            (default_0): Linear(in_features=1536, out_features=4, bias=False)
+          )
+          (lora_B): ModuleDict(
+            (default_0): Linear(in_features=4, out_features=1536, bias=False)
+          )
+          (lora_embedding_A): ParameterDict()
+          (lora_embedding_B): ParameterDict()
+        )
+        (to_v): lora.Linear(
+          (base_layer): Linear(in_features=1536, out_features=1536, bias=True)
+          (lora_dropout): ModuleDict(
+            (default_0): Identity()
+          )
+          (lora_A): ModuleDict(
+            (default_0): Linear(in_features=1536, out_features=4, bias=False)
+          )
+          (lora_B): ModuleDict(
+            (default_0): Linear(in_features=4, out_features=1536, bias=False)
+          )
+          (lora_embedding_A): ParameterDict()
+          (lora_embedding_B): ParameterDict()
+        )
+        (add_k_proj): Linear(in_features=1536, out_features=1536, bias=True)
+        (add_v_proj): Linear(in_features=1536, out_features=1536, bias=True)
+        (add_q_proj): Linear(in_features=1536, out_features=1536, bias=True)
+        (to_out): ModuleList(
+          (0): lora.Linear(
+            (base_layer): Linear(in_features=1536, out_features=1536, bias=True)
+            (lora_dropout): ModuleDict(
+              (default_0): Identity()
+            )
+            (lora_A): ModuleDict(
+              (default_0): Linear(in_features=1536, out_features=4, bias=False)
+            )
+            (lora_B): ModuleDict(
+              (default_0): Linear(in_features=4, out_features=1536, bias=False)
+            )
+            (lora_embedding_A): ParameterDict()
+            (lora_embedding_B): ParameterDict()
+          )
+          (1): Dropout(p=0.0, inplace=False)
+        )
+      )
+      (norm2): LayerNorm((1536,), eps=1e-06, elementwise_affine=False)
+      (ff): FeedForward(
+        (net): ModuleList(
+          (0): GELU(
+            (proj): Linear(in_features=1536, out_features=6144, bias=True)
+          )
+          (1): Dropout(p=0.0, inplace=False)
+          (2): Linear(in_features=6144, out_features=1536, bias=True)
+        )
+      )
+    )
+  )
+  (norm_out): AdaLayerNormContinuous(
+    (silu): SiLU()
+    (linear): Linear(in_features=1536, out_features=3072, bias=True)
+    (norm): LayerNorm((1536,), eps=1e-06, elementwise_affine=False)
+  )
+  (proj_out): Linear(in_features=1536, out_features=64, bias=True)
+)

@@ -1,12 +1,12 @@
 # make sure to adjust the column name to match the dataset you are using
-DATASET="darknoon/sf-symbols-captioned"
-OUTPUT_NAME="symbols-sd3-v1"
+#DATASET="your/dataset"
+#OUTPUT_NAME="your-output-name"
 
-python train_dreambooth_lora_sd3_modal.py \
- --pretrained_model_name_or_path=stabilityai/stable-diffusion-3-medium-diffusers  \
+python train_dreambooth_lora_sdxl_modal.py \
+ --pretrained_model_name_or_path=stabilityai/stable-diffusion-xl-base-1.0  \
  --dataset_name=$DATASET \
  --mixed_precision="bf16" \
- --instance_prompt="in the style of SF" \
+ --instance_prompt="" \
  --resolution=1024 \
  --train_batch_size=4 \
  --gradient_accumulation_steps=4 \
@@ -20,6 +20,6 @@ python train_dreambooth_lora_sd3_modal.py \
  --validation_epochs=1 \
  --seed="0" \
  --push_to_hub \
- --hub_model_id="symbols-sd3-lora"
+ --hub_model_id="symbols-sdxl-lora"
 
 

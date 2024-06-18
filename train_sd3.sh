@@ -1,10 +1,10 @@
 # make sure to adjust the column name to match the dataset you are using
-$DATASET="darknoon/sf-symbols-captioned"
-$OUTPUT_NAME="symbols-sd3-v1"
+#DATASET="your/dataset"
+#OUTPUT_NAME="your-output-name"
 
 python train_dreambooth_sd3_modal.py \
  --pretrained_model_name_or_path=stabilityai/stable-diffusion-3-medium-diffusers  \
- --dataset_name="darknoon/sf-symbols-captioned" \
+ --dataset_name=$DATASET \
  --mixed_precision="bf16" \
  --instance_prompt="  " \
  --resolution=1024 \
